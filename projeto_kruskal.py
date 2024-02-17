@@ -100,17 +100,18 @@ class Kruskal:
 
         return self.arvore_minima
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     grafo = Grafo()
     tabela = []
     with open('Pontos_turisticos_do_Brasil.txt', 'r', encoding='utf-8') as arquivo:
         for linha in arquivo:
-            dados = linha.split(', ')  # Divide a linha em partes separadas por espaços em branco
-            coluna1 = dados[0]  # Primeira coluna
-            coluna2 = dados[1]  # Segunda coluna
-            coluna3 = float(dados[2])  # Terceira coluna convertida para float
-            tupla = (coluna1, coluna2, coluna3)  # Cria uma tupla com os dados
-            tabela.append(tupla)  # Adiciona a tupla à lista
+            if not linha.startswith('#'):
+                dados = linha.split(', ')  # Divide a linha em partes separadas por espaços em branco
+                coluna1 = dados[0]  # Primeira coluna
+                coluna2 = dados[1]  # Segunda coluna
+                coluna3 = float(dados[2])  # Terceira coluna convertida para float
+                tupla = (coluna1, coluna2, coluna3)  # Cria uma tupla com os dados
+                tabela.append(tupla)  # Adiciona a tupla à lista
 
     # Adicionando vértices e arestas com base na tabela
     for origem, destino, peso in tabela:
@@ -126,7 +127,7 @@ if __name__ == "__main__":
     kruskal = Kruskal(grafo)
     arvore_minima = kruskal.kruskal()
 
-    print("Arestas da árvore geradora mínima:")
+    print('Arestas da árvore geradora mínima:')
     for aresta in arvore_minima:
         print(aresta)
 
