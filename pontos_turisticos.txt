@@ -1,0 +1,135 @@
+Floresta Amazônica,-3.4653,-62.2159
+Teatro Amazonas,-3.1304,-60.0234
+Encontro das Águas,-3.1275,-59.9642
+Parque Nacional do Jaú,-1.8333,-61.5000
+Praia de Ponta Negra,-3.0856,-60.1086
+Parque Nacional do Monte Roraima,5.1208,-60.7503
+Praia de Alter do Chão,-2.5316,-54.9416
+Praia do Tapajós,-2.4447,-54.7004
+Parque Nacional dos Lençóis Maranhenses,-2.5816,-42.4345
+Centro Histórico de Belém,-1.4558,-48.5024
+Cachoeira do Buracão,-2.4754,-60.9438
+Museu da Amazônia,-3.0716,-59.9684
+Parque Nacional do Juruena,-10.4771,-58.6579
+Cachoeira do Formiga,-11.8830,-46.7662
+Parque Nacional do Rio Novo,-12.7733,-46.8063
+Palácio Rio Negro,-3.1076,-60.0200
+Museu do Seringal,-3.1053,-59.9456
+Museu Paraense Emílio Goeldi,-1.4591,-48.4557
+Palácio da Justiça,-3.1287,-60.0202
+Parque Nacional do Viruá, 1.5228,-61.3004
+Praia de Maracanã,-2.4391,-54.7111
+Museu Casa Eduardo Ribeiro,-3.1216,-60.0189
+Parque Nacional do Pico da Neblina,0.8489,-66.0054
+Museu do Índio,-3.1292,-60.0204
+Porto de Manaus,-3.1362,-60.0255
+Parque Estadual do Rio Negro Setor Sul,-3.1901,-59.8037
+Fortaleza de São José da Barra do Rio Negro,-3.1332,-60.0109
+Bosque da Ciência,-3.0979,-60.0154
+Museu de Ciências Naturais da Amazônia,-3.1208,-60.0223
+Praia do Sancho,-3.8507,-32.4233
+Porto de Galinhas,-8.5380,-34.9956
+Lençóis Maranhenses,-2.5710,-42.6697
+Parque Nacional da Chapada Diamantina,-12.7423,-41.5619
+Praia do Forte,-12.5744,-37.9984
+Canoa Quebrada,-4.5281,-37.7022
+Praia de Pipa,-6.2308,-35.0636
+Parque Nacional de Jericoacoara,-2.7984,-40.4987
+Centro Histórico de Olinda,-8.0089,-34.8553
+Praia de Carneiros,-8.6971,-35.1401
+Praia de Maragogi,-9.0072,-35.2221
+Praia de Porto de Galinhas,-8.5027,-34.9956
+Cachoeira da Fumaça,-12.7422,-41.4066
+Morro de São Paulo,-13.3817,-38.9112
+Parque Nacional de Ubajara,-3.8544,-40.9201
+Praia dos Carneiros,-8.6803,-35.1375
+Lagoa do Uruaú,-4.3130,-37.8129
+Museu de Arte Moderna Aloisio Magalhães,-8.0622,-34.8716
+Arena Fonte Nova,-12.9730,-38.5041
+Praia dos Carneiros,-8.7436,-35.0892
+Ponta do Seixas,-7.1476,-34.7920
+Praia de Morro Branco,-4.1881,-38.1371
+Praia do Gunga,-9.8704,-35.6349
+Parque das Dunas,-5.8576,-35.1816
+Praia do Francês,-9.7548,-35.8698
+Praia de Boa Viagem,-8.1236,-34.8980
+Praia de Genipabu,-5.6932,-35.3028
+Praia de Canoa Quebrada,-4.5261,-37.7017
+Cristo Redentor,-22.9519,-43.2105
+Pão de Açúcar,-22.9488,-43.1542
+Copacabana,-22.9718,-43.1824
+Parque Nacional do Itatiaia,-22.4070,-44.6650
+Jardim Botânico do Rio de Janeiro,-22.9709,-43.2252
+Praia de Lopes Mendes,-23.1488,-44.1823
+Parque Nacional da Serra dos Órgãos,-22.4727,-42.9962
+Parque Estadual de Ibitipoca,-21.6927,-21.6927
+Parque Nacional do Caparaó,-20.4495,-20.4495
+Museu do Ipiranga,-23.5879,-46.6132
+Avenida Paulista,-23.5618,-46.6566
+Parque do Ibirapuera,-23.5879,-46.6571
+Museu de Arte de São Paulo,-23.5612,-46.6563
+Rua Augusta,-23.5561,-46.6635
+Parque Nacional da Serra da Canastra,-20.2834,-46.5244
+Parque Nacional de Itatiaia,-22.3408,-44.6871
+Pico da Bandeira,-20.4657,-41.7872
+Parque Estadual do Rio Doce,-19.8929,-42.6646
+Parque Estadual de Campos do Jordão,-22.7186,-45.5827
+Parque Estadual do Ibitipoca,-21.5635,-43.8846
+Cachoeira do Flávio,-21.4851,-44.6460
+Pico do Papagaio,-22.2914,-44.6441
+Cachoeira da Esmeralda,-21.7309,-44.9902
+Praça da Liberdade,-19.9342,-43.9369
+Parque Nacional do Itatiaia,-22.3408,-44.6871
+Pico das Agulhas Negras,-22.4741,-44.6168
+Pedra do Sino,-22.4741,-42.9667
+Chapada dos Guimarães,-15.4324,-55.7497
+Parque Nacional da Chapada dos Veadeiros,-14.0053,-47.7225
+Cataratas do Rio Sucuri,-21.1807,-56.4517
+Aquário do Pantanal,-20.4569,-54.5813
+Parque Nacional das Emas,-18.0282,-52.8272
+Centro Histórico de Goiás Velho,-15.9332,-50.1378
+Serra da Bodoquena,-21.4377,-56.4870
+Parque Estadual do Jalapão,-10.9184,-46.4738
+Cachoeira da Formiga,-10.5707,-46.4744
+Parque Nacional da Serra da Bodoquena,-21.4449,-56.4967
+Cachoeira do Segredo,-15.3702,-55.7649
+Vale das Águas Quentes,-17.7732,-48.7724
+Praia do Cerrado,-17.7749,-48.7707
+Cachoeira do Indaiá,-18.4974,-54.7533
+Passeio de Bote no Rio Formoso,-21.1448,-56.4836
+Buraco das Araras,-21.4841,-56.1503
+Praia do Figueirinha,-17.7753,-48.7669
+Vale das Pedras,-17.7736,-48.7716
+Cachoeira Boca da Onça,-20.8102,-56.5374
+Praia do Cerradinho,-17.7747,-48.7723
+Nascente Azul,-21.1266,-56.4835
+Parque Nacional da Serra da Bodoquena,-21.4380,-56.4885
+Praia do Cachoeirão,-17.7715,-48.7721
+Lagoa Misteriosa,-21.4769,-56.1523
+Parque Nacional das Emas,-18.5335,-52.7979
+Parque Natural Municipal Chico Mendes,-17.7753,-48.7669
+Cataratas do Iguaçu,-25.6953,-54.4367
+Parque Nacional de Aparados da Serra,-29.1374,-50.9115
+Parque Estadual de Vila Velha,-25.4111,-49.4234
+Parque Nacional do Iguaçu,-25.6842,-54.4409
+Morro da Igreja,-28.2558,-49.4982
+Serra do Rio do Rastro,-28.4090,-49.0746
+Cânion Fortaleza,-29.3271,-50.0990
+Beto Carrero World,-26.8305,-48.6476
+Parque Nacional de São Joaquim,-28.2481,-49.9521
+Cachoeira do Avencal,-28.2575,-49.1381
+Cambará do Sul,-29.0421,-50.1463
+Cânion Itaimbezinho,-29.3186, -50.1369
+Praia da Joaquina, -27.6275, -48.4547
+Praia do Rosa, -28.1606, -48.6257
+Parque Nacional dos Aparados da Serra, -29.1511, -50.0804
+Parque Estadual de Itapuã, -30.3727, -51.0331
+Praia Brava, -26.9781, -48.6519
+Praia de Bombinhas, -27.1457, -48.4852
+Parque Estadual de Guartelá, -24.2983, -50.4161
+Praia de Jurerê Internacional, -27.4393, -48.4934
+Parque Estadual Fritz Plaumann, -27.1953, -52.0216
+Parque Estadual de Vila Velha, -25.4153, -49.4247
+Lagoa do Peri, -27.7383, -48.5941
+Parque Estadual de Ilha Grande, -25.7500, -48.2500
+Parque Nacional da Serra Geral, -29.1640, -50.2120

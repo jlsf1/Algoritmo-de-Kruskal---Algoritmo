@@ -1,0 +1,269 @@
+import networkx as nx
+import matplotlib.pyplot as plt
+
+
+class Vertice:
+    def _init_(self, nome):
+        self.nome = nome
+        self.vizinhos = {}
+
+    def adicionar_vizinho(self, vizinho, peso):
+        self.vizinhos[vizinho] = peso
+
+
+class Grafo:
+
+    def _init_(self):
+        self.vertices = {}
+        self.indice_vertices = {}  # Dicionário para mapear vértices para índices
+
+    def adicionar_vertice(self, vertice):
+        if isinstance(vertice, Vertice) and vertice.nome not in self.vertices:
+            indice = len(self.vertices)  # Obtém o próximo índice disponível
+            self.vertices[vertice.nome] = vertice
+            self.indice_vertices[vertice.nome] = indice  # Mapeia o nome do vértice para o índice
+            return True
+        else:
+            return False
+
+    def adicionar_aresta(self, origem, destino, peso):
+        if origem in self.vertices and destino in self.vertices:
+            self.vertices[origem].adicionar_vizinho(destino, peso)
+            self.vertices[destino].adicionar_vizinho(origem, peso)
+            return True
+        else:
+            return False
+
+    def visualizar_grafo(self, arvore_minima=None):
+        G = nx.Graph()
+        for origem, vertice in self.vertices.items():
+            for vizinho, peso in vertice.vizinhos.items():
+                G.add_edge(origem, vizinho, weight=peso)
+
+        pos = nx.spring_layout(G)  # Define o layout do grafo
+        nx.draw(G, pos, with_labels=True)  # Desenha o grafo
+        labels = nx.get_edge_attributes(G, 'weight')
+        nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)  # Adiciona rótulos de peso nas arestas
+
+        # Adiciona as arestas da árvore geradora mínima se estiverem disponíveis
+        if arvore_minima:
+            for aresta in arvore_minima:
+                origem, destino, peso = aresta
+                G.add_edge(origem, destino, weight=peso, color='yellow')
+
+            # Desenha as arestas da árvore geradora mínima em vermelho
+            nx.draw_networkx_edges(G, pos, edgelist=arvore_minima, edge_color='yellow', width=2)
+
+        plt.show()
+
+
+class Kruskal:
+
+    def _init_(self, grafo):
+        self.grafo = grafo
+        self.arvore_minima = []
+
+    def encontrar(self, subset, i):
+        if 0 <= i < len(subset):  # Verifica se o índice está dentro dos limites da lista
+            if subset[i] == -1:
+                return i
+            return self.encontrar(subset, subset[i])
+        return -1  # Retorna -1 se o índice estiver fora dos limites da lista
+
+    def unir(self, subset, x, y):
+        x_raiz = self.encontrar(subset, x)
+        y_raiz = self.encontrar(subset, y)
+        subset[x_raiz] = y_raiz
+
+    def kruskal(self):
+
+        grafo_ordenado = []
+        # Coletando todas as arestas do grafo
+        for origem, vertice in self.grafo.vertices.items():
+            for vizinho, peso in vertice.vizinhos.items():
+                grafo_ordenado.append((origem, vizinho, peso))
+
+        # Ordenando as arestas pelo peso
+        grafo_ordenado = sorted(grafo_ordenado, key=lambda item: item[2])
+
+        vertices = len(self.grafo.vertices)
+        subset = [-1] * vertices
+        arestas_adicionadas = 0
+        index = 0
+
+        while arestas_adicionadas < vertices - 1:
+            origem, destino, peso = grafo_ordenado[index]
+            index += 1
+            # Obtém o índice do vértice
+            x = self.encontrar(subset, self.grafo.indice_vertices[origem])
+            y = self.encontrar(subset, self.grafo.indice_vertices[destino])
+
+            if x != y:
+                self.arvore_minima.append((origem, destino, peso))
+                self.unir(subset, x, y)
+                arestas_adicionadas += 1
+
+        return self.arvore_minima
+
+
+if _name_ == "_main_":
+    grafo = Grafo()
+
+    tabela = [
+        ('Floresta Amazônica', 'Centro Histórico de Belém', 1541.20),
+        ('Teatro Amazonas', 'Parque das Dunas', 2772.98),
+        ('Encontro das Águas', 'Parque Estadual do Rio Negro Setor Sul', 19.14),
+        ('Parque Nacional do Jaú', 'Parque Nacional do Itatiaia', 2907.93),
+        ('Praia de Ponta Negra', 'Floresta Amazônica', 237.94),
+        ('Parque Nacional do Monte Roraima', 'Parque Nacional da Serra Geral', 3957.77),
+        ('Praia de Alter do Chão', 'Parque Estadual de Vila Velha', 2600.26),
+        ('Praia do Tapajós', 'Cachoeira da Fumaça', 1855.47),
+        ('Parque Nacional dos Lençóis Maranhenses', 'Parque Nacional de Itatiaia', 2199.60),
+        ('Centro Histórico de Belém', 'Praia de Carneiros', 1683.33),
+        ('Cachoeira do Buracão', 'Museu do Índio', 125.57),
+        ('Museu da Amazônia', 'Lençóis Maranhenses', 1924.14),
+        ('Parque Nacional do Juruena', 'Praia de Alter do Chão', 969.94),
+        ('Cachoeira do Formiga', 'Museu de Arte Moderna Aloisio Magalhães', 1370.67),
+        ('Parque Nacional do Rio Novo', 'Cataratas do Rio Sucuri', 1385.30),
+        ('Palácio Rio Negro', 'Praia do Figueirinha', 2035.00),
+        ('Museu do Seringal', 'Pão de Açúcar', 2845.71),
+        ('Museu Paraense Emílio Goeldi', 'Porto de Galinhas', 1684.64),
+        ('Palácio da Justiça', 'Cambará do Sul', 3052.41),
+        ('Parque Nacional do Viruá', 'Parque Nacional dos Lençóis Maranhenses', 2148.10),
+        ('Praia de Maracanã', 'Praia de Lopes Mendes', 2557.40),
+        ('Museu Casa Eduardo Ribeiro', 'Praia do Sancho', 3067.21),
+        ('Parque Nacional do Pico da Neblina', 'Encontro das Águas', 803.26),
+        ('Museu do Índio', 'Praia de Canoa Quebrada', 2483.68),
+        ('Porto de Manaus', 'Parque Estadual de Ilha Grande', 2801.49),
+        ('Parque Estadual do Rio Negro Setor Sul', 'Praia de Bombinhas', 2912.18),
+        ('Fortaleza de São José da Barra do Rio Negro', 'Parque Estadual do Rio Doce', 2643.64),
+        ('Bosque da Ciência', 'Cachoeira da Esmeralda', 2625.80),
+        ('Museu de Ciências Naturais da Amazônia', 'Museu Paraense Emílio Goeldi', 1299.57),
+        ('Praia do Sancho', 'Parque Estadual do Ibitipoca', 2318.50),
+        ('Porto de Galinhas', 'Praia dos Carneiros', 24.96),
+        ('Lençóis Maranhenses', 'Serra da Bodoquena', 2568.48),
+        ('Parque Nacional da Chapada Diamantina', 'Cristo Redentor', 1143.39),
+        ('Praia do Forte', 'Parque Nacional da Chapada dos Veadeiros', 1065.41),
+        ('Canoa Quebrada', 'Serra do Rio do Rastro', 2903.97),
+        ('Praia de Pipa', 'Parque Nacional da Serra da Canastra', 1987.61),
+        ('Parque Nacional de Jericoacoara', 'Praia de Morro Branco', 304.90),
+        ('Centro Histórico de Olinda', 'Beto Carrero World', 2541.87),
+        ('Praia de Carneiros', 'Fortaleza de São José da Barra do Rio Negro', 2820.54),
+        ('Praia de Maragogi', 'Praia de Maracanã', 2276.43),
+        ('Praia de Porto de Galinhas', 'Cachoeira do Buracão', 2950.80),
+        ('Cachoeira da Fumaça', 'Parque Nacional do Caparaó', 2390.54),
+        ('Morro de São Paulo', 'Praia de Boa Viagem', 728.57),
+        ('Parque Nacional de Ubajara', 'Porto de Manaus', 2124.31),
+        ('Praia dos Carneiros', 'Praia de Ponta Negra', 2838.83),
+        ('Lagoa do Uruaú', 'Parque Natural Municipal Chico Mendes', 1908.65),
+        ('Museu de Arte Moderna Aloisio Magalhães', 'Parque Nacional da Serra dos Órgãos', 1816.43),
+        ('Arena Fonte Nova', 'Cachoeira da Formiga', 908.35),
+        ('Praia dos Carneiros', 'Vale das Pedras', 1786.30),
+        ('Ponta do Seixas', 'Pico do Papagaio', 1981.29),
+        ('Praia de Morro Branco', 'Parque Estadual do Jalapão', 1182.99),
+        ('Praia do Gunga', 'Praia do Forte', 395.60),
+        ('Parque das Dunas', 'Parque Estadual de Vila Velha', 2643.46),
+        ('Praia do Francês', 'Morro da Igreja', 2495.63),
+        ('Praia de Boa Viagem', 'Aquário do Pantanal', 2519.74),
+        ('Praia de Genipabu', 'Cataratas do Iguaçu', 3008.45),
+        ('Praia de Canoa Quebrada', 'Parque Nacional do Juruena', 2403.55),
+        ('Cristo Redentor', 'Cachoeira do Flávio', 219.74),
+        ('Pão de Açúcar', 'Vale das Águas Quentes', 819.77),
+        ('Copacabana', 'Centro Histórico de Olinda', 1879.00),
+        ('Parque Nacional do Itatiaia', 'Parque Nacional do Rio Novo', 1082.47),
+        ('Jardim Botânico do Rio de Janeiro', 'Museu de Ciências Naturais da Amazônia', 2846.57),
+        ('Praia de Lopes Mendes', 'Cachoeira do Indaiá', 1214.34),
+        ('Parque Nacional da Serra dos Órgãos', 'Canoa Quebrada', 2065.75),
+        ('Parque Estadual de Ibitipoca', 'Praia do Rosa', 2806.57),
+        ('Parque Nacional do Caparaó', 'Ponta do Seixas', 2134.86),
+        ('Museu do Ipiranga', 'Lagoa do Peri', 500.94),
+        ('Avenida Paulista', 'Arena Fonte Nova', 1453.93),
+        ('Parque do Ibirapuera', 'Cachoeira do Avencal', 573.89),
+        ('Museu de Arte de São Paulo', 'Praia do Francês', 1910.56),
+        ('Rua Augusta', 'Lagoa do Uruaú', 2331.95),
+        ('Parque Nacional da Serra da Canastra', 'Cachoeira do Segredo', 1119.95),
+        ('Parque Nacional de Itatiaia', 'Teatro Amazonas', 2694.51),
+        ('Pico da Bandeira', 'Palácio da Justiça', 2755.30),
+        ('Parque Estadual do Rio Doce', 'Parque Nacional de Aparados da Serra', 1320.75),
+        ('Parque Estadual de Campos do Jordão', 'Morro de São Paulo', 1251.16),
+        ('Parque Estadual do Ibitipoca', 'Parque Estadual de Itapuã', 1209.60),
+        ('Cachoeira do Flávio', 'Copacabana', 223.31),
+        ('Pico do Papagaio', 'Parque Estadual de Guartelá', 630.83),
+        ('Cachoeira da Esmeralda', 'Parque Nacional do Iguaçu', 1058.14),
+        ('Praça da Liberdade', 'Praia do Tapajós', 2261.22),
+        ('Parque Nacional do Itatiaia', 'Cachoeira do Formiga', 1178.28),
+        ('Pico das Agulhas Negras', 'Museu Casa Eduardo Ribeiro', 2710.95),
+        ('Pedra do Sino', 'Nascente Azul', 1405.17),
+        ('Chapada dos Guimarães', 'Passeio de Bote no Rio Formoso', 637.10),
+        ('Parque Nacional da Chapada dos Veadeiros', 'Parque Estadual Fritz Plaumann', 1527.14),
+        ('Cataratas do Rio Sucuri', 'Rua Augusta', 1041.59),
+        ('Aquário do Pantanal', 'Parque Nacional do Jaú', 2193.19),
+        ('Parque Nacional das Emas', 'Praia de Porto de Galinhas', 2221.20),
+        ('Centro Histórico de Goiás Velho', 'Pico das Agulhas Negras', 927.81),
+        ('Serra da Bodoquena', 'Praia Brava', 1004.57),
+        ('Parque Estadual do Jalapão', 'Cachoeira Boca da Onça', 1535.00),
+        ('Cachoeira da Formiga', 'Parque Nacional do Viruá', 2117.86),
+        ('Parque Nacional da Serra da Bodoquena', 'Parque do Ibirapuera', 1038.89),
+        ('Cachoeira do Segredo', 'Praia do Cachoeirão', 792.11),
+        ('Vale das Águas Quentes', 'Praia do Cerradinho', 0.17),
+        ('Praia do Cerrado', 'Museu do Seringal', 2030.30),
+        ('Cachoeira do Indaiá', 'Museu de Arte de São Paulo', 1010.91),
+        ('Passeio de Bote no Rio Formoso', 'Parque Nacional do Pico da Neblina', 2644.53),
+        ('Buraco das Araras', 'Palácio Rio Negro', 2075.76),
+        ('Praia do Figueirinha', 'Parque Estadual de Ibitipoca', 2867.11),
+        ('Vale das Pedras', 'Chapada dos Guimarães', 788.31),
+        ('Cachoeira Boca da Onça', 'Parque Nacional do Itatiaia', 1238.59),
+        ('Praia do Cerradinho', 'Praia de Maragogi', 1757.69),
+        ('Nascente Azul', 'Praia de Jurerê Internacional', 1070.39),
+        ('Parque Nacional da Serra da Bodoquena', 'Cânion Itaimbezinho', 1081.48),
+        ('Praia do Cachoeirão', 'Praça da Liberdade', 562.93),
+        ('Lagoa Misteriosa', 'Parque Nacional de Ubajara', 2552.15),
+        ('Parque Nacional das Emas', 'Parque Nacional da Chapada Diamantina', 1363.93),
+        ('Parque Natural Municipal Chico Mendes', 'Parque Nacional dos Aparados da Serra', 1266.99),
+        ('Cataratas do Iguaçu', 'Parque Nacional de São Joaquim', 527.41),
+        ('Parque Nacional de Aparados da Serra', 'Pico da Bandeira', 1330.74),
+        ('Parque Estadual de Vila Velha', 'Praia do Gunga', 2254.66),
+        ('Parque Nacional do Iguaçu', 'Buraco das Araras', 496.80),
+        ('Morro da Igreja', 'Praia dos Carneiros', 2636.16),
+        ('Serra do Rio do Rastro', 'Bosque da Ciência', 3032.60),
+        ('Cânion Fortaleza', 'Lagoa Misteriosa', 1061.24),
+        ('Beto Carrero World', 'Praia da Joaquina', 90.36),
+        ('Parque Nacional de São Joaquim', 'Parque Nacional do Monte Roraima', 3869.75),
+        ('Cachoeira do Avencal', 'Parque Nacional das Emas', 1139.84),
+        ('Cambará do Sul', 'Praia do Cerrado', 1255.72),
+        ('Cânion Itaimbezinho', 'Museu da Amazônia', 3085.34),
+        ('Praia da Joaquina', 'Jardim Botânico do Rio de Janeiro', 736.99),
+        ('Praia do Rosa', 'Praia de Genipabu', 2857.29),
+        ('Parque Nacional dos Aparados da Serra', 'Museu do Ipiranga', 706.74),
+        ('Parque Estadual de Itapuã', 'Parque Nacional das Emas', 1323.48),
+        ('Praia Brava', 'Centro Histórico de Goiás Velho', 1232.57),
+        ('Praia de Bombinhas', 'Pedra do Sino', 760.76),
+        ('Parque Estadual de Guartelá', 'Cânion Fortaleza', 558.90),
+        ('Praia de Jurerê Internacional', 'Praia de Pipa', 2743.70),
+        ('Parque Estadual Fritz Plaumann', 'Parque Nacional da Serra da Bodoquena', 782.26),
+        ('Parque Estadual de Campos do Jordão', 'Parque Estadual de Vila Velha', 491.76),
+        ('Lagoa do Peri', 'Parque Nacional da Serra da Bodoquena', 1060.72),
+        ('Parque Estadual de Ilha Grande', 'Parque Nacional de Jericoacoara', 2671.78),
+        ('Parque Nacional da Serra Geral', 'Avenida Paulista', 714.84)
+    ]
+
+    # Adicionando vértices e arestas com base na tabela
+    for origem, destino, peso in tabela:
+        if origem not in grafo.vertices:
+            grafo.adicionar_vertice(Vertice(origem))
+        if destino not in grafo.vertices:
+            grafo.adicionar_vertice(Vertice(destino))
+        grafo.adicionar_aresta(origem, destino, peso)
+
+    # Visualizando o grafo
+    grafo.visualizar_grafo()
+
+    kruskal = Kruskal(grafo)
+    arvore_minima = kruskal.kruskal()
+
+    print("Arestas da árvore geradora mínima:")
+    for aresta in arvore_minima:
+        print(aresta)
+
+    # Visualizando o grafo da árvore mínima gerada
+    grafo.visualizar_grafo(arvore_minima)

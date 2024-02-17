@@ -1,4 +1,7 @@
+import networkx as nx
+import matplotlib.pyplot as plt
 from geopy.distance import geodesic
+
 
 # Função para calcular a distância entre dois pontos turísticos
 def calcular_distancia(coord1, coord2):
