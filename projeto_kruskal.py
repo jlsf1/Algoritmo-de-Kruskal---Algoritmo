@@ -1,31 +1,28 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 
-
 class Vertice:
-    def _init_(self, nome):
+    def __init__(self, nome):
         self.nome = nome
         self.vizinhos = {}
 
     def adicionar_vizinho(self, vizinho, peso):
         self.vizinhos[vizinho] = peso
 
-
 class Grafo:
-
-    def _init_(self):
+    def __init__(self):
         self.vertices = {}
-        self.indice_vertices = {}  # Dicionário para mapear vértices para índices
+        self.indice_vertices = {}  
 
     def adicionar_vertice(self, vertice):
         if isinstance(vertice, Vertice) and vertice.nome not in self.vertices:
-            indice = len(self.vertices)  # Obtém o próximo índice disponível
+            indice = len(self.vertices)  
             self.vertices[vertice.nome] = vertice
-            self.indice_vertices[vertice.nome] = indice  # Mapeia o nome do vértice para o índice
+            self.indice_vertices[vertice.nome] = indice  
             return True
         else:
             return False
-
+        
     def adicionar_aresta(self, origem, destino, peso):
         if origem in self.vertices and destino in self.vertices:
             self.vertices[origem].adicionar_vizinho(destino, peso)
@@ -35,31 +32,29 @@ class Grafo:
             return False
 
     def visualizar_grafo(self, arvore_minima=None):
-        G = nx.Graph()
-        for origem, vertice in self.vertices.items():
-            for vizinho, peso in vertice.vizinhos.items():
-                G.add_edge(origem, vizinho, weight=peso)
+            G = nx.Graph()
+            for origem, vertice in self.vertices.items():
+                for vizinho, peso in vertice.vizinhos.items():
+                    G.add_edge(origem, vizinho, weight=peso)
 
-        pos = nx.spring_layout(G)  # Define o layout do grafo
-        nx.draw(G, pos, with_labels=True)  # Desenha o grafo
-        labels = nx.get_edge_attributes(G, 'weight')
-        nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)  # Adiciona rótulos de peso nas arestas
+            pos = nx.spring_layout(G)  #Define o layout do grafo
+            nx.draw(G, pos, with_labels=True)  #Desenha o grafo
+            labels = nx.get_edge_attributes(G, 'weight')
+            nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)  #Adiciona rótulos de peso nas arestas
 
-        # Adiciona as arestas da árvore geradora mínima se estiverem disponíveis
-        if arvore_minima:
-            for aresta in arvore_minima:
-                origem, destino, peso = aresta
-                G.add_edge(origem, destino, weight=peso, color='yellow')
+            #Adiciona as arestas da árvore geradora mínima se estiverem disponíveis
+            if arvore_minima:
+                for aresta in arvore_minima:
+                    origem, destino, peso = aresta
+                    G.add_edge(origem, destino, weight=peso, color='yellow')
 
-            # Desenha as arestas da árvore geradora mínima em vermelho
-            nx.draw_networkx_edges(G, pos, edgelist=arvore_minima, edge_color='yellow', width=2)
+                #Desenha as arestas da árvore geradora mínima em vermelho
+                nx.draw_networkx_edges(G, pos, edgelist=arvore_minima, edge_color='yellow', width=2)
 
-        plt.show()
-
-
+            plt.show()
+            
 class Kruskal:
-
-    def _init_(self, grafo):
+    def __init__(self, grafo):
         self.grafo = grafo
         self.arvore_minima = []
 
@@ -95,7 +90,7 @@ class Kruskal:
             origem, destino, peso = grafo_ordenado[index]
             index += 1
             # Obtém o índice do vértice
-            x = self.encontrar(subset, self.grafo.indice_vertices[origem])
+            x = self.encontrar(subset, self.grafo.indice_vertices[origem]) 
             y = self.encontrar(subset, self.grafo.indice_vertices[destino])
 
             if x != y:
@@ -105,8 +100,7 @@ class Kruskal:
 
         return self.arvore_minima
 
-
-if _name_ == "_main_":
+if __name__ == "__main__":
     grafo = Grafo()
 
     tabela = [
