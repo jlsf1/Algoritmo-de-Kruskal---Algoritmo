@@ -1,3 +1,5 @@
+import tkinter as tk
+from tkinter import messagebox
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -32,27 +34,31 @@ class Grafo:
             return False
 
     def visualizar_grafo(self, arvore_minima=None):
-            G = nx.Graph()
-            for origem, vertice in self.vertices.items():
-                for vizinho, peso in vertice.vizinhos.items():
-                    G.add_edge(origem, vizinho, weight=peso)
 
-            pos = nx.spring_layout(G)  #Define o layout do grafo
-            nx.draw(G, pos, with_labels=True)  #Desenha o grafo
-            labels = nx.get_edge_attributes(G, 'weight')
-            nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)  #Adiciona rótulos de peso nas arestas
+        # Fecha a janela do Matplotlib se estiver aberta
+        plt.close()
 
-            #Adiciona as arestas da árvore geradora mínima se estiverem disponíveis
-            if arvore_minima:
-                for aresta in arvore_minima:
-                    origem, destino, peso = aresta
-                    G.add_edge(origem, destino, weight=peso, color='yellow')
+        G = nx.Graph()
+        for origem, vertice in self.vertices.items():
+            for vizinho, peso in vertice.vizinhos.items():
+                G.add_edge(origem, vizinho, weight=peso)
 
-                #Desenha as arestas da árvore geradora mínima em vermelho
-                nx.draw_networkx_edges(G, pos, edgelist=arvore_minima, edge_color='yellow', width=2)
+        pos = nx.spring_layout(G)  # Define o layout do grafo
+        nx.draw(G, pos, with_labels=True)  # Desenha o grafo
+        labels = nx.get_edge_attributes(G, 'weight')
+        nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)  # Adiciona rótulos de peso nas arestas
 
-            plt.show()
-            
+        # Adiciona as arestas da árvore geradora mínima se estiverem disponíveis
+        if arvore_minima:
+            for aresta in arvore_minima:
+                origem, destino, peso = aresta
+                G.add_edge(origem, destino, weight=peso, color='yellow')
+
+            # Desenha as arestas da árvore geradora mínima
+            nx.draw_networkx_edges(G, pos, edgelist=arvore_minima, edge_color='yellow', width=2)
+
+        plt.show()
+
 class Kruskal:
     def __init__(self, grafo):
         self.grafo = grafo
@@ -100,36 +106,47 @@ class Kruskal:
 
         return self.arvore_minima
 
-if __name__ == '__main__':
-    grafo = Grafo()
-    tabela = []
-    with open('Pontos_turisticos_do_Brasil.txt', 'r', encoding='utf-8') as arquivo:
-        for linha in arquivo:
-            if not linha.startswith('#'):
-                dados = linha.split(', ')  # Divide a linha em partes separadas por espaços em branco
-                coluna1 = dados[0]  # Primeira coluna
-                coluna2 = dados[1]  # Segunda coluna
-                coluna3 = float(dados[2])  # Terceira coluna convertida para float
-                tupla = (coluna1, coluna2, coluna3)  # Cria uma tupla com os dados
-                tabela.append(tupla)  # Adiciona a tupla à lista
-
-    # Adicionando vértices e arestas com base na tabela
-    for origem, destino, peso in tabela:
-        if origem not in grafo.vertices:
-            grafo.adicionar_vertice(Vertice(origem))
-        if destino not in grafo.vertices:
-            grafo.adicionar_vertice(Vertice(destino))
-        grafo.adicionar_aresta(origem, destino, peso)
-
-    # Visualizando o grafo
+# Função para exibir o grafo
+def mostrar_grafo():
     grafo.visualizar_grafo()
 
+# Função para exibir a árvore mínima
+def mostrar_arvore_minima():
     kruskal = Kruskal(grafo)
     arvore_minima = kruskal.kruskal()
-
-    print('Arestas da árvore geradora mínima:')
-    for aresta in arvore_minima:
-        print(aresta)
-
-    # Visualizando o grafo da árvore mínima gerada
     grafo.visualizar_grafo(arvore_minima)
+
+# Cria a interface
+root = tk.Tk()
+root.title('Algoritmo de Kruskal')
+
+# Cria o grafo
+grafo = Grafo()
+tabela = []
+with open('Pontos_turisticos_do_Brasil.txt', 'r', encoding='utf-8') as arquivo:
+    for linha in arquivo:
+        if not linha.startswith('#'):
+            dados = linha.split(', ')  # Divide a linha em partes separadas por espaços em branco
+            coluna1 = dados[0]  # Primeira coluna
+            coluna2 = dados[1]  # Segunda coluna
+            coluna3 = float(dados[2])  # Terceira coluna convertida para float
+            tupla = (coluna1, coluna2, coluna3)  # Cria uma tupla com os dados
+            tabela.append(tupla)  # Adiciona a tupla à lista
+
+# Adicionando vértices e arestas com base na tabela
+for origem, destino, peso in tabela:
+    if origem not in grafo.vertices:
+        grafo.adicionar_vertice(Vertice(origem))
+    if destino not in grafo.vertices:
+        grafo.adicionar_vertice(Vertice(destino))
+    grafo.adicionar_aresta(origem, destino, peso)
+
+# Botões
+botao_grafo = tk.Button(root, text = 'Mostrar Grafo', command = mostrar_grafo)
+botao_grafo.pack(pady=10)
+
+botao_arvore_minima = tk.Button(root, text = 'Mostrar Árvore Mínima', command = mostrar_arvore_minima)
+botao_arvore_minima.pack(pady=10)
+
+# Main
+root.mainloop()
