@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import networkx as nx
 import matplotlib.pyplot as plt
+from tkinter import PhotoImage
 
 class Vertice:
     def __init__(self, nome):
@@ -119,6 +120,11 @@ def mostrar_arvore_minima():
 # Cria a interface
 root = tk.Tk()
 root.title('Algoritmo de Kruskal')
+root.geometry('500x300')
+
+background_image = PhotoImage(file='.\imagens\Tela.png')
+background_label = tk.Label(root, image=background_image)
+background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
 # Cria o grafo
 grafo = Grafo()
@@ -142,11 +148,13 @@ for origem, destino, peso in tabela:
     grafo.adicionar_aresta(origem, destino, peso)
 
 # Botões
-botao_grafo = tk.Button(root, text = 'Mostrar Grafo', command = mostrar_grafo)
-botao_grafo.pack(pady=10)
+imagem_botao_grafo = tk.PhotoImage(file='.\imagens\grafo.png')
+botao_grafo = tk.Button(root, text = 'Mostrar Grafo', image = imagem_botao_grafo, width=150, height=40, command = mostrar_grafo)
+botao_grafo.place(x=90, y=230)
 
-botao_arvore_minima = tk.Button(root, text = 'Mostrar Árvore Mínima', command = mostrar_arvore_minima)
-botao_arvore_minima.pack(pady=10)
+imagem_botao_arvore_minima = tk.PhotoImage(file='.\imagens\árvore mínima.png')
+botao_arvore_minima = tk.Button(root, text = 'Mostrar Árvore Mínima', image = imagem_botao_arvore_minima, width=150, height=40, command = mostrar_arvore_minima)
+botao_arvore_minima.place(x=270, y=230)
 
 # Main
 root.mainloop()
