@@ -2,7 +2,7 @@
 
 ## Descrição:
 
-O projeto aborda um cenário ilustrativo que seria conectar, a partir das menores distâncias, pontos turísticos do Brasil a partir da utilzação do Algoritmo de Kruskal, conforme proposto na atividade solicitada.
+O projeto aborda um cenário ilustrativo que seria conectar, a partir das menores distâncias, pontos turísticos do Brasil a partir da utilização do Algoritmo de Kruskal, conforme proposto na atividade solicitada.
 
 A implementação do projeto consistiu, primeiramente, em elencar pontos turísticos relevantes distribuídos por regiões do país e obter suas coordenadas (longitude e latitude). A partir disso, criamos um programa para calcular a distância em quilômetros a partir das coordenadas dos pontos turísticos.
 
