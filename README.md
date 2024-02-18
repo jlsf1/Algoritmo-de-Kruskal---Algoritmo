@@ -17,7 +17,8 @@ Além disso, o programa para facilitar a visualização e a interação com os d
 - NetworkX
 - Tkinter
 - geopy
-
+## Relatório:
+- https://docs.google.com/document/d/1cp7nlM7YfOmMb_UbdYLb-SfkSRk_bTIQlpqqBzN48DQ/edit?usp=sharing
 ## Dupla:
 - Júlia Nunes
 - José Leandro
