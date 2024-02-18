@@ -15,6 +15,7 @@ Além disso, o programa para facilitar a visualização e a interação com os d
 ## Bibliotecas:
 - Matplotlib
 - NetworkX
+- Tkinter
 
 ## Dupla:
 - Júlia Nunes
