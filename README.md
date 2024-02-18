@@ -10,7 +10,7 @@ Em posse desses dados, criamos um programa que cria um grafo de modo que os vér
 
 O programa, continuando sua execução, aplica o Algoritmo de Kruskal para obter a árvore geradora mínima, com base no grafo supramencionado, para traçar um roteiro para contemplar todos os pontos turísticos, percorrendo a menor quantidade de quilômetros possível.
 
-Além disso, o programa para facilitar a visualização e a interação com os dados implementou representação visual tanto do grafo gerado, quanto da árvore geradora mínima, ambos com suas respectivos vértices, arestas e pesos. Implementamos também uma interface com um design amigável e estéticamente agradável para facilitar a experiência do usuário.
+Além disso, o programa para facilitar a visualização e a interação com os dados implementou representação visual tanto do grafo gerado, quanto da árvore geradora mínima, ambos com suas respectivos vértices, arestas e pesos. Implementamos também uma interface com um design amigável e esteticamente agradável para facilitar a experiência do usuário.
 
 ## Bibliotecas:
 - Matplotlib
