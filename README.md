@@ -16,6 +16,7 @@ Além disso, o programa para facilitar a visualização e a interação com os d
 - Matplotlib
 - NetworkX
 - Tkinter
+- geopy
 
 ## Dupla:
 - Júlia Nunes
